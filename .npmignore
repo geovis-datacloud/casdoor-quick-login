@@ -1,0 +1,6 @@
+# [.npmignore]
+src/
+public/
+*.config.js
+__tests__/
+*.log

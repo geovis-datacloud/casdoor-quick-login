@@ -1,0 +1,32 @@
+{
+    "name": "geovisearth-offline-users",
+    "private": true,
+    "version": "0.0.1",
+    "type": "module",
+    "main": "./dist/cjs/index.js",
+    "module": "./dist/esm/index.js",
+    "types": "./dist/types/index.d.ts",
+    "files": [
+        "dist",
+        "README.md",
+        "LICENSE"
+    ],
+    "scripts": {
+        "dev": "vite",
+        "build": "rm -rf dist && tsc --project tsconfig.build.json &&  tsc --project tsconfig.build.cjs.json",
+        "build:sdk": "vite build -c vite.sdk.config.js",
+        "preview": "vite preview"
+    },
+    "devDependencies": {
+        "typescript": "~5.8.3",
+        "vite": "^6.3.5"
+    },
+    "peerDependencies": {
+        "casdoor-js-sdk": "^0.16.0"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "license": "ISC"
+}
