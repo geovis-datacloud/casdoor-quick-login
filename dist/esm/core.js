@@ -15,12 +15,15 @@ class CasdoorHidden {
         });
         // config.redirectPath = config.redirectPath + '?'
         this.loginCallback = config.loginCallback;
+        if (!config.redirectPath) {
+            config.redirectPath = '';
+        }
         this.sdk = new Sdk({
             serverUrl: config.serverUrl,
             clientId: config.clientId,
             appName: config.appName,
             organizationName: config.organizationName,
-            redirectPath: '',
+            redirectPath: config.redirectPath,
         });
     }
     // 监控登陆状态

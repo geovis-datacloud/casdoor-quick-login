@@ -4,6 +4,7 @@ export type CasdoorHiddenConfig = {
     clientId: string;
     appName: string;
     organizationName: string;
+    redirectPath?: string;
     loginCallback: (accessToken: string, user: JwtPayload) => void;
 };
 declare class CasdoorHidden {
