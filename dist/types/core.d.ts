@@ -10,7 +10,7 @@ declare class CasdoorHidden {
     private loginCallback;
     private sdk;
     constructor(config: CasdoorHiddenConfig);
-    listenerLogin(): void;
+    listenerLogin(): boolean;
     start(): void;
     getSigninUrl(): string;
 }

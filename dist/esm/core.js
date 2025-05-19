@@ -43,7 +43,9 @@ class CasdoorHidden {
             }).catch((err) => {
                 console.log(err);
             });
+            return true;
         }
+        return false;
     }
     // 开启登录流程
     start() {
