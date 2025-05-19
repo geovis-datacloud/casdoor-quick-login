@@ -15,13 +15,20 @@ const sdk = getSdk({
         console.log('这是用户信息', user)
     },
 })
-// 监听页面加载完成，自动处理登录回调
+// 在callback页面监听页面加载完成，自动处理登录回调
 window.addEventListener('load', () => {
     sdk.listenerLogin()
 });
-// 启动登录流程
-sdk.start()
-
 
 ```
 
+你可以通过登录按钮，点击后启动登录流程
+```javascript
+    document.querySelector<HTMLButtonElement>('#login')!.addEventListener('click', () => sdk.start())
+```
+也可以在欢迎页面load之后直接启动登录流程
+```javascript
+    window.addEventListener('load', () => {
+        sdk.start()
+    });
+```
