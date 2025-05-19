@@ -30,5 +30,25 @@ window.addEventListener('load', () => {
 ```javascript
     window.addEventListener('load', () => {
         sdk.start()
-    });
+    });    
 ```
+假如start和listenerLogin放在同一个页面中，请这样使用
+```javascript
+window.addEventListener('load', () => {
+    sdk = getSdk({
+        serverUrl: "http://192.168.0.1:8000",
+        clientId: "clientId",
+        organizationName: "organizationName",
+        appName: "appName",
+        loginCallback(accessToken, user) {
+            console.log('拿到token了', accessToken, user)
+            console.log('这是用户信息', user)
+        },
+    })
+    // 将start逻辑放置于监听登录回调之后，避免陷入登录循环
+    if (!sdk.listenerLogin()) {
+        sdk.start()
+    }
+});
+```
+
