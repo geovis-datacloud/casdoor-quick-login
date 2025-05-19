@@ -8,6 +8,8 @@ const sdk = getSdk({
     clientId: "clientId",
     organizationName: "organizationName",
     appName: "appName",
+    // 可以省略，省略将会跳转回设定的默认callback页面
+    redirectPath: "callback",
     loginCallback(accessToken, user) {
         // 存储accessToken
         console.log('拿到token了', accessToken, user)
