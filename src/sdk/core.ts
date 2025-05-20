@@ -16,9 +16,11 @@ export type CasdoorHiddenConfig = {
 class CasdoorHidden {
     private loginCallback: (accessToken: string, user: JwtPayload) => void;
     private sdk: Sdk
+    // private config: CasdoorHiddenConfig
 
     constructor(config: CasdoorHiddenConfig) {
         // config.redirectPath = config.redirectPath + '?'
+        // this.config = config
         this.loginCallback = config.loginCallback
         if (!config.redirectPath) {
             config.redirectPath = ''
@@ -58,6 +60,12 @@ class CasdoorHidden {
     // 开启登录流程
     start() {
         this.sdk.signin_redirect()
+    }
+
+    logout() {
+        // 获取
+        const sdk: any = this.sdk
+        console.log(sdk.pkce.authorizeUrl())
     }
 
     getSigninUrl() {

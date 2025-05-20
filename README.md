@@ -1,7 +1,7 @@
 
 ## Quick Use
 ```javascript
-import { getSdk } from './geovisearth-offline-users';
+import { getSdk } from 'geovisearth-offline-users';
 
 const sdk = getSdk({
     serverUrl: "http://192.168.0.1:8000",
