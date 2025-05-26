@@ -2,7 +2,7 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 // Assuming the SDK is imported as 'Sdk' and has an 'init' method
-import { getSdk } from './sdk'; // Replace with actual SDK import path
+import { getSdk, type SilentSigninMessage } from './sdk'; // Replace with actual SDK import path
 import { setupCounter } from './counter'; // Replace with actual SDK import path
 
 
@@ -41,13 +41,19 @@ window.addEventListener('load', () => {
         clientId: "clientId",
         organizationName: "organizationName",
         appName: "appName",
-        loginCallback(accessToken, user) {
-            console.log('拿到token了', accessToken, user)
-            console.log('这是用户信息', user)
-        },
     })
+    sdk.silentSignin(
+        (msg: SilentSigninMessage) => {
+            console.log('收到成功消息', msg)
+        },
+        (msg: SilentSigninMessage) => {
+            console.log('收到失败消息', msg)
+        },
+    )
     document.querySelector<HTMLButtonElement>('#login')!.addEventListener('click', () => sdk.start())
-    document.querySelector<HTMLButtonElement>('#parse')!.addEventListener('click', () => sdk.listenerLogin())
-    // console.log(sdk.getSigninUrl());
-
+    document.querySelector<HTMLButtonElement>('#parse')!.addEventListener('click', () => sdk.listenerLogin((accessToken: string, user: any) => {
+        console.log('拿到token了', accessToken, user)
+        console.log('这是用户信息', user)
+    }))
+    document.querySelector<HTMLButtonElement>('#logout')!.addEventListener('click', () => sdk.logout())
 });
