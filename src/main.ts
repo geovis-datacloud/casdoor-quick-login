@@ -2,7 +2,7 @@ import './style.css'
 import typescriptLogo from './typescript.svg'
 import viteLogo from '/vite.svg'
 // Assuming the SDK is imported as 'Sdk' and has an 'init' method
-import { getSdk, type SilentSigninMessage } from './sdk'; // Replace with actual SDK import path
+import { getSdk, } from './sdk'; // Replace with actual SDK import path
 import { setupCounter } from './counter'; // Replace with actual SDK import path
 
 
@@ -42,14 +42,6 @@ window.addEventListener('load', () => {
         organizationName: "organizationName",
         appName: "appName",
     })
-    sdk.silentSignin(
-        (msg: SilentSigninMessage) => {
-            console.log('收到成功消息', msg)
-        },
-        (msg: SilentSigninMessage) => {
-            console.log('收到失败消息', msg)
-        },
-    )
     document.querySelector<HTMLButtonElement>('#login')!.addEventListener('click', () => sdk.start())
     document.querySelector<HTMLButtonElement>('#parse')!.addEventListener('click', () => sdk.listenerLogin((accessToken: string, user: any) => {
         console.log('拿到token了', accessToken, user)

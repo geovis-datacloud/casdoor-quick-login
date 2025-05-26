@@ -5,6 +5,13 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getSdk = getSdk;
 const casdoor_js_sdk_1 = __importDefault(require("casdoor-js-sdk"));
+// export type SilentSigninMessage = {
+//     tag: "Casdoor",
+//     type: "SilentSignin",
+//     success: boolean,
+//     user?: any,
+//     accessToken?: any
+// }
 class CasdoorHidden {
     constructor(config) {
         Object.defineProperty(this, "sdk", {
@@ -62,37 +69,37 @@ class CasdoorHidden {
     start() {
         this.sdk.signin_redirect();
     }
-    silentSignin(onSuccess, onFailure) {
-        const iframe = document.createElement('iframe');
-        iframe.style.display = 'none';
-        iframe.src = `${this.getSigninUrl()}&silentSignin=1`;
-        let called = false;
-        const handleMessage = (event) => {
-            if (window !== window.parent) {
-                return null;
-            }
-            const message = event.data;
-            // { tag: "Casdoor", type: "SilentSignin", data: data }
-            if (message.tag !== "Casdoor" || message.type !== "SilentSignin") {
-                return;
-            }
-            // 静默登陆成功
-            if (message.success) {
-                message.user.avatar && (message.user.avatar = this.config.serverUrl + message.user.avatar);
-                onSuccess(message);
-            }
-            // 静默登陆失败
-            else {
-                if (called) {
-                    return;
-                }
-                called = true;
-                onFailure(message);
-            }
-        };
-        window.addEventListener('message', handleMessage);
-        document.body.appendChild(iframe);
-    }
+    // silentSignin(onSuccess: (msg: SilentSigninMessage) => void, onFailure: (msg: SilentSigninMessage) => void) {
+    //     const iframe = document.createElement('iframe');
+    //     iframe.style.display = 'none';
+    //     iframe.src = `${this.getSigninUrl()}&silentSignin=1`;
+    //     let called = false
+    //     const handleMessage = (event: MessageEvent<SilentSigninMessage>) => {
+    //         if (window !== window.parent) {
+    //             return null;
+    //         }
+    //         const message = event.data;
+    //         // { tag: "Casdoor", type: "SilentSignin", data: data }
+    //         if (message.tag !== "Casdoor" || message.type !== "SilentSignin") {
+    //             return;
+    //         }
+    //         // 静默登陆成功
+    //         if (message.success) {
+    //             message.user.avatar && (message.user.avatar = this.config.serverUrl + message.user.avatar)
+    //             onSuccess(message);
+    //         }
+    //         // 静默登陆失败
+    //         else {
+    //             if (called) {
+    //                 return;
+    //             }
+    //             called = true
+    //             onFailure(message);
+    //         }
+    //     };
+    //     window.addEventListener('message', handleMessage);
+    //     document.body.appendChild(iframe);
+    // }
     logout() {
         this.sdk.signin_redirect();
     }
